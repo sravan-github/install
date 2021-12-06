@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: yes
+  gather_facts: False
+  tasks:
+    - include_vars: in_var.yml
+    - name: Installing {{ packages }} on {{ hostname }}
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ packages }}"
